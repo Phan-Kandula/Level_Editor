@@ -30,7 +30,7 @@ public class LevelEditorModel {
 
 	public void setClipboardLayer(Point p1, Point p2) {
 		int r1, c1, r2, c2;
-		
+		if (p1 == null || p2 == null) return;
 		c1 = (int)Math.min(p1.getY(), p2.getY());
 		r1 = (int)Math.min(p1.getX(), p2.getX());
 		c2 = (int)Math.max(p1.getY(), p2.getY());
@@ -72,7 +72,7 @@ public class LevelEditorModel {
 	
 	// Returned as width, height
 	public Dimension getClipboardLayerDimensions() {
-		return clipboardLayer == null ? new Dimension(0, 0) : new Dimension(clipboardLayer[0].length, clipboardLayer.length);
+		return clipboardLayer == null || clipboardLayer.length == 0 ? new Dimension(0, 0) : new Dimension(clipboardLayer[0].length, clipboardLayer.length);
 	}
 
 	public BackgroundTile[][] getClipboardLayer() {
