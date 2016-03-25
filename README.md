@@ -6,7 +6,7 @@ This program is intended to help you create level scenery data easily so you don
 
 1. Fork the project and clone it to your local computer
 2. Create a new Eclipse project in the folder you cloned into
-3. Place all tile images you want to use into the images/ folder (they can be any size and will scale automatically to the grid size)
+3. Place all tile images you want to use into the **images/** folder (they can be any size and will scale automatically to the grid size)
 
 ## Tools ##
 
@@ -14,7 +14,7 @@ This program is intended to help you create level scenery data easily so you don
 * **Erase mode** Either button paints a null image into the chosen location
 * **Select mode** Draws a selection to be copied
 * **Move mode** Moves the current selection as a copy of the selection
-* ***Copy** Copies a selection to the clipboard
+* **Copy** Copies a selection to the clipboard
 * **Paste** Pastes whatever is in the clipboard and changes to **Move mode**
 
 ## Controls and Features ##
@@ -22,3 +22,9 @@ This program is intended to help you create level scenery data easily so you don
 * The clipboard is shared among all windows so you can copy and paste from one editor window to another
 * Ctrl + left_click sets a tile's isWalkable() property.  This property is recorded for each tile when saving a level.
 * You can select a group of tiles and then use Ctrl + left_click to change the isWalkable() property for the entire selection
+* You must write the code to load levels yourself
+
+## Suggestions ##
+* For larger images, use a Paint Editor to chop them up into smaller tiles.
+* Once you have level loading working, use a separate window to save all the things you build that are multi-tile objects.  Then you can paste them into your levels from one source.
+* The Level Editor  is designed for background scenery but you could add a Sprite layer to add items, objects, characters, etc on top of the background layer.  At that point, you would have a complete level editor that literally sets up the complete levels in your game. 
