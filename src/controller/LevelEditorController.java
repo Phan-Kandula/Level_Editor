@@ -329,19 +329,22 @@ public class LevelEditorController {
 				int col = e.getX() / (view.getCanvas().getWidth() / numCols());
 
 				if (isWithinBounds(e.getX(), e.getY())) {
-					if (e.getButton() == MouseEvent.BUTTON1) {
-						ImageIcon image = view.images[(Integer)view.foregroundBrush.getSelectedItem()];
-						model.setObjectAt(row, col, new BackgroundTile(
-										image,
-										view.listOfFiles[(Integer)view.foregroundBrush.getSelectedItem()].getName()
-										));
-					}
-					else {
-						ImageIcon image = view.images[(Integer)view.backgroundBrush.getSelectedItem()];
-						model.setObjectAt(row, col, new BackgroundTile(
-										image,
-										view.listOfFiles[(Integer)view.backgroundBrush.getSelectedItem()].getName()
-										));
+					if (view.images.length > 0 && view.foregroundBrush.getSelectedItem() != null) {
+						if (e.getButton() == MouseEvent.BUTTON1) {
+							
+							ImageIcon image = view.images[(Integer)view.foregroundBrush.getSelectedItem()];
+							model.setObjectAt(row, col, new BackgroundTile(
+											image,
+											view.listOfFiles[(Integer)view.foregroundBrush.getSelectedItem()].getName()
+											));
+						}
+						else {
+							ImageIcon image = view.images[(Integer)view.backgroundBrush.getSelectedItem()];
+							model.setObjectAt(row, col, new BackgroundTile(
+											image,
+											view.listOfFiles[(Integer)view.backgroundBrush.getSelectedItem()].getName()
+											));
+						}
 					}
 					view.getCanvas().repaint();
 				}
@@ -384,27 +387,28 @@ public class LevelEditorController {
 				return;
 
 			if (toolMode == PAINT_MODE) {
-
-				// Determine the grid location we click on
-				int row = e.getY() / (view.getCanvas().getHeight() / numRows());
-				int col = e.getX() / (view.getCanvas().getWidth() / numCols());
-
-				if (isWithinBounds(e.getX(), e.getY())) {
-					if (e.getModifiers() == MouseEvent.BUTTON1_MASK) {
-						ImageIcon image = view.images[(Integer)view.foregroundBrush.getSelectedItem()];
-						model.setObjectAt(row, col, new BackgroundTile(
-										image,
-										view.listOfFiles[(Integer)view.foregroundBrush.getSelectedItem()].getName()
-										));
+				if (view.images.length > 0 && view.foregroundBrush.getSelectedItem() != null) {
+					// Determine the grid location we click on
+					int row = e.getY() / (view.getCanvas().getHeight() / numRows());
+					int col = e.getX() / (view.getCanvas().getWidth() / numCols());
+	
+					if (isWithinBounds(e.getX(), e.getY())) {
+						if (e.getModifiers() == MouseEvent.BUTTON1_MASK) {
+							ImageIcon image = view.images[(Integer)view.foregroundBrush.getSelectedItem()];
+							model.setObjectAt(row, col, new BackgroundTile(
+											image,
+											view.listOfFiles[(Integer)view.foregroundBrush.getSelectedItem()].getName()
+											));
+						}
+						else {
+							ImageIcon image = view.images[(Integer)view.backgroundBrush.getSelectedItem()];
+							model.setObjectAt(row, col, new BackgroundTile(
+											image,
+											view.listOfFiles[(Integer)view.backgroundBrush.getSelectedItem()].getName()
+											));
+						}
+						view.getCanvas().repaint();
 					}
-					else {
-						ImageIcon image = view.images[(Integer)view.backgroundBrush.getSelectedItem()];
-						model.setObjectAt(row, col, new BackgroundTile(
-										image,
-										view.listOfFiles[(Integer)view.backgroundBrush.getSelectedItem()].getName()
-										));
-					}
-					view.getCanvas().repaint();
 				}
 			}
 			else if (toolMode == ERASE_MODE) {

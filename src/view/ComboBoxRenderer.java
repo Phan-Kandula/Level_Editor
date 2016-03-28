@@ -57,24 +57,26 @@ public class ComboBoxRenderer extends JLabel implements ListCellRenderer<Object>
 			int index, boolean isSelected, boolean cellHasFocus) {
 		// Get the selected index. (The index param isn't
 		// always valid, so just use the value.)
-		int selectedIndex = ((Integer) value).intValue();
-
-		if (isSelected) {
-			setBackground(list.getSelectionBackground());
-			setForeground(list.getSelectionForeground());
-		} else {
-			setBackground(list.getBackground());
-			setForeground(list.getForeground());
-		}
-
-		// Set the icon and text. If icon was null, say so.
-		ImageIcon icon = new ImageIcon(images[selectedIndex].getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
-		if (images[selectedIndex] != null) {
-			setIcon(icon);
-			setText(images[selectedIndex].getDescription());
-			setFont(list.getFont());
-		} else {
-			setUhOhText("(null Icon)", list.getFont());
+		if (value != null) {
+			int selectedIndex = ((Integer) value).intValue();
+	
+			if (isSelected) {
+				setBackground(list.getSelectionBackground());
+				setForeground(list.getSelectionForeground());
+			} else {
+				setBackground(list.getBackground());
+				setForeground(list.getForeground());
+			}
+	
+			// Set the icon and text. If icon was null, say so.
+			ImageIcon icon = new ImageIcon(images[selectedIndex].getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
+			if (images[selectedIndex] != null) {
+				setIcon(icon);
+				setText(images[selectedIndex].getDescription());
+				setFont(list.getFont());
+			} else {
+				setUhOhText("(null Icon)", list.getFont());
+			}
 		}
 		return this;
 	}

@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
@@ -75,16 +76,23 @@ public class LevelEditorView extends JFrame {
 
 		// Load image files in the "images" subfolder into listOfFiles array
 		File folder = new File("images");
-		listOfFiles = folder.listFiles(new FilenameFilter() {
-		    public boolean accept(File dir, String name) {
-		    	String[] extensions = {".gif", ".jpg", ".png", ".bmp"};
-		    	for (String s : extensions) {
-		    		if (s.toLowerCase().endsWith(".gif"))
-		    			return true;
-		    	}
-		    	return false;
-		    }});
-
+		if (folder.isDirectory() || folder.mkdir()) {
+			listOfFiles = folder.listFiles(new FilenameFilter() {
+				public boolean accept(File dir, String name) {
+					String[] extensions = {".gif", ".jpg", ".png", ".bmp"};
+					for (String s : extensions) {
+						if (s.toLowerCase().endsWith(".gif"))
+							return true;
+					}
+					return false;
+				}
+			});
+		} else {
+			JOptionPane.showMessageDialog(this, "could not find or create images directory!");
+			listOfFiles = new File[0];
+		}
+		
+		
 		// Create an index array to be used by the JComboBox
         intArray = new Integer[listOfFiles.length];
 
